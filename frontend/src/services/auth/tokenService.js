@@ -12,7 +12,7 @@ export const tokenService = {
         const cookies = nookies.get(ctx);
         return cookies[ACCESS_TOKEN_KEY] || null;
     },
-    delete() {
+    delete(ctx = null) {
         nookies.destroy(ctx, ACCESS_TOKEN_KEY);
     }
 };

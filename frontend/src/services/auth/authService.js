@@ -11,9 +11,9 @@ export const authService = {
             },
         })
         .then(async (resp) => {
+            //guarda o token nos cookies
             if(!resp.ok) throw new Error('Não foi possível fazer login');
             const body = await resp.body;
-            console.log(body);
 
             tokenService.save(body.data.access_token);
         })

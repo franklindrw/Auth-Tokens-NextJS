@@ -1,4 +1,6 @@
 import { withSession } from '../src/services/auth/session';
+import { useRouter } from 'next/router';
+import { tokenService } from "../src/services/auth/tokenService";
 
 export const getServerSideProps = withSession((ctx) => {
   return {
@@ -28,6 +30,12 @@ export const getServerSideProps = withSession((ctx) => {
 // };
 
 export default function AuthPageSSR(props){
+  const router = useRouter();
+
+  const logout = () => {
+    tokenService.delete();
+    router.push('/');
+  };
   
     return (
         <div>
@@ -35,6 +43,7 @@ export default function AuthPageSSR(props){
         <pre>
           {JSON.stringify(props, null, 2)}
         </pre>
+        <button onClick={logout}>Sair</button>
         </div>
     )
 }
